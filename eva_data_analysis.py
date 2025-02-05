@@ -2,6 +2,19 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 def read_json_to_df(input_file):
+
+    """
+    Read a JSON file and return a Pandas DataFrame
+    Clean the data by removing rows with missing values and sorting by date
+
+    Args:
+        input_file (str): path to the JSON file
+
+    Returns:
+        eva_df (pd.DataFrame): Pandas DataFrame containing the EVA data    
+
+    """
+
     print(f'Reading JSON file {input_file}')
     eva_df = pd.read_json(input_file, convert_dates=['date'])
     eva_df['eva'] = eva_df['eva'].astype(float)
