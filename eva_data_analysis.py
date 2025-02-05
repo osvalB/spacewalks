@@ -23,6 +23,20 @@ def read_json_to_df(input_file):
     return eva_df
 
 def write_df_to_csv(eva_df,output_file):
+
+    """
+    Write a Pandas DataFrame to a CSV file
+
+    Args:
+
+        eva_df (pd.DataFrame): Pandas DataFrame containing the EVA data
+        output_file (str): path to the output CSV file
+
+    Returns:
+        None
+        
+    """
+
     print(f'Writing DataFrame to CSV file {output_file}')
     eva_df.to_csv(output_file, index=False)
     return None
