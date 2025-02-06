@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+title: spacewalks
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Osvaldo
+    family-names: Burastero
+repository-code: >-
+    https://github.com/osvalB/spacewalks.git
+abstract: >-
+  A Python package to analyse NASA spacewalks data.
+keywords:
+    - NASA
+    - spacewalks
+    - extravehicular activity
