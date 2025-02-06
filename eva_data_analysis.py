@@ -16,6 +16,23 @@ def main(input_file, output_file, graph_file):
 
     print("--END--")
 
+def text_to_duration(text):
+
+    """
+    Convert a text string in the format 'H:MM' to a float of hours
+
+    Args:
+        text (str): text string in the format 'H:MM'
+
+    Returns:
+        duration (float): duration in hours
+
+    """
+
+    hours, minutes = text.split(':')
+    duration = int(hours) + int(minutes)/60
+    return duration
+
 def read_json_to_df(input_file):
 
     """
@@ -71,7 +88,7 @@ def plot_cumulative_time_in_space(eva_df, graph_file):
 
     """
 
-    eva_df['duration_hours'] = eva_df['duration'].str.split(":").apply(lambda x: int(x[0]) + int(x[1])/60)
+    eva_df['duration_hours'] = eva_df['duration'].apply(text_to_duration)
     eva_df['cumulative_time'] = eva_df['duration_hours'].cumsum()
     plt.plot(eva_df['date'], eva_df['cumulative_time'], 'ko-')
     plt.xlabel('Year')
