@@ -1,5 +1,17 @@
 import matplotlib.pyplot as plt
 import pandas as pd
+import sys
+
+def main(input_file, output_file, graph_file):
+    print("--START--")
+
+    eva_data = read_json_to_df(input_file)
+
+    write_df_to_csv(eva_data, output_file)
+
+    plot_cumulative_time_in_space(eva_data, graph_file)
+
+    print("--END--")
 
 def read_json_to_df(input_file):
 
@@ -66,19 +78,20 @@ def plot_cumulative_time_in_space(eva_df, graph_file):
     plt.show()
     return None
 
-# Data source: https://data.nasa.gov/resource/eva.json (with modifications)
-input_file = open('./eva-data.json', 'r')
-output_file = open('./eva-data.csv', 'w') 
-graph_file = './cumulative_eva_graph.png'
+if __name__ == '__main__':
 
-eva_df = read_json_to_df(input_file)
+    if len (sys.argv) < 3:
 
-# Write the DataFrame to a CSV file
-write_df_to_csv(eva_df, output_file)
+        print('Using default input and output filenames')
+        input_file = './eva-data.json'
+        output_file = './eva-data.csv'
 
-# Obtain the hours spent in space for each EVA
-eva_df['duration_hours'] = eva_df['duration'].str.split(":").apply(lambda x: int(x[0]) + int(x[1])/60)
-eva_df['cumulative_time'] = eva_df['duration_hours'].cumsum()
+    else:
 
-# Plot the cumulative time spent in space over time
-plot_cumulative_time_in_space(eva_df, graph_file)
+        print('Using input and output filenames provided as command-line arguments')
+        input_file = sys.argv[1]
+        output_file = sys.argv[2]
+
+    graph_file = './cumulative_eva_graph.png'
+
+    main(input_file, output_file, graph_file)
