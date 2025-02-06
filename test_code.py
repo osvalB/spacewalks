@@ -20,10 +20,14 @@ def test_text_to_duration_integer():
 
     assert text_to_duration('10:00') == 10
 
-def test_calculate_crew_size():
+
+@pytest.mark.parametrize("input_text, expected_output", [
+    ('valentina tereshkova;', 1),
+    ('Judith Resnik; ellison Onizuka; Ronald McNair;', 3),
+])
+def test_calculate_crew_size(input_text, expected_output):
     """
     Test that calculate_crew_size returns the expected crew size
     """
-    actual_result = calculate_crew_size('sara doe; john connor;')
-    expected_result = 2
-    assert actual_result == expected_result
+    actual_result = calculate_crew_size(input_text)
+    assert actual_result == expected_output
