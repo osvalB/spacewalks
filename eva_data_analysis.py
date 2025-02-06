@@ -67,7 +67,7 @@ def write_df_to_csv(eva_df,output_file):
         output_file (str): path to the output CSV file
 
     Returns:
-        None
+        (None): nothing is returned
         
     """
 
@@ -84,7 +84,7 @@ def calculate_crew_size(crew):
         crew (str): The text entry in the crew column containing a list of crew member names
 
     Returns:
-        int: The crew size
+        int (int): The crew size
     """
     if crew.split() == []:
         return None
@@ -119,7 +119,7 @@ def plot_cumulative_time_in_space(eva_df, graph_file):
         graph_file (str): path to the output graph file
 
     Returns:
-        None
+        (None): nothing is returned
 
     """
 

@@ -20,7 +20,6 @@ def test_text_to_duration_integer():
 
     assert text_to_duration('10:00') == 10
 
-
 @pytest.mark.parametrize("input_text, expected_output", [
     ('valentina tereshkova;', 1),
     ('Judith Resnik; ellison Onizuka; Ronald McNair;', 3),
