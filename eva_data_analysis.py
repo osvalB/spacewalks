@@ -147,6 +147,6 @@ if __name__ == '__main__':
         input_file = sys.argv[1]
         output_file = sys.argv[2]
 
-    graph_file = os.path.join('results','eva-time.png')
+    graph_file = os.path.join('results','cumulative_eva_graph.png')
 
     main(input_file, output_file, graph_file)
