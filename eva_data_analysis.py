@@ -41,6 +41,30 @@ def write_df_to_csv(eva_df,output_file):
     eva_df.to_csv(output_file, index=False)
     return None
 
+def plot_cumulative_time_in_space(eva_df, graph_file):
+
+    """
+    Plot the cumulative time spent in space over time
+
+    Args:
+
+        eva_df (pd.DataFrame): Pandas DataFrame containing the EVA data
+        graph_file (str): path to the output graph file
+
+    Returns:
+        None
+
+    """
+
+    eva_df['duration_hours'] = eva_df['duration'].str.split(":").apply(lambda x: int(x[0]) + int(x[1])/60)
+    eva_df['cumulative_time'] = eva_df['duration_hours'].cumsum()
+    plt.plot(eva_df['date'], eva_df['cumulative_time'], 'ko-')
+    plt.xlabel('Year')
+    plt.ylabel('Total time spent in space to date (hours)')
+    plt.tight_layout()
+    plt.savefig(graph_file)
+    plt.show()
+    return None
 
 # Data source: https://data.nasa.gov/resource/eva.json (with modifications)
 input_file = open('./eva-data.json', 'r')
@@ -55,9 +79,6 @@ write_df_to_csv(eva_df, output_file)
 # Obtain the hours spent in space for each EVA
 eva_df['duration_hours'] = eva_df['duration'].str.split(":").apply(lambda x: int(x[0]) + int(x[1])/60)
 eva_df['cumulative_time'] = eva_df['duration_hours'].cumsum()
-plt.plot(eva_df['date'], eva_df['cumulative_time'], 'ko-')
-plt.xlabel('Year')
-plt.ylabel('Total time spent in space to date (hours)')
-plt.tight_layout()
-plt.savefig(graph_file)
-plt.show()
+
+# Plot the cumulative time spent in space over time
+plot_cumulative_time_in_space(eva_df, graph_file)
