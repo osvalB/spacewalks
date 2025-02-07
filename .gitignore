@@ -4,3 +4,5 @@ venv_*
 htmlcov
 .coverage
 site
+__pycache__
+*.pyc
